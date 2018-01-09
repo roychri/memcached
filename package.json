@@ -31,7 +31,7 @@
     "should": "*",
     "pre-commit": "*"
   },
-  // comment to force runnig tests before commit
+  {"//", "comment the next section to force runnig tests before commit"},
   "pre-commit": [
     "bypass",
   ],
