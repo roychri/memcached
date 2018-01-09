@@ -31,9 +31,9 @@
     "should": "*",
     "pre-commit": "*"
   },
-  {"//", "comment the next section to force runnig tests before commit"},
+  "//": "comment the next section to force runnig tests before commit",
   "pre-commit": [
-    "bypass",
+    "bypass"
   ],
   "scripts": {
     "test": "mocha $(find test -name '*.test.js')",
