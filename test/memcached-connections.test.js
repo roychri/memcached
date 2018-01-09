@@ -126,6 +126,9 @@ describe('Memcached connections', function () {
     , reconnectAttempts = 0;
 
     memcached.on('reconnecting', function() {
+      // Point to a worker server so it conly recconect once
+      this.issues[server].tokens[0] = common.servers.single.split(/:/)[1];
+      this.issues[server].tokens[1] = common.servers.single.split(/:/)[0];
       reconnectAttempts++;
     });
 
@@ -167,6 +170,11 @@ describe('Memcached connections', function () {
             // Third request should find no servers
             memcached.get('idontcare', function(err) {
             assert.throws(function() { throw err }, /not available/);
+              memcached.on('reconnecting', function() {
+                // Point to a worker server so it conly recconect once
+                this.issues[server].tokens[0] = common.servers.single.split(/:/)[1];
+                this.issues[server].tokens[1] = common.servers.single.split(/:/)[0];
+              });
               // Give enough time for server to reconnect
               setTimeout(function() {
                 // Server should be reconnected, but expect ECONNREFUSED
